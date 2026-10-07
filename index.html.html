@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Koyn Agency — Estúdio Digital | Presença, Design &amp; Tecnologia</title>
+<meta content="Criamos sites que traduzem o valor do seu trabalho. Da primeira impressão à próxima conversa. Estúdio Digital / Brasil." name="description"/>
+<!-- Favicon Koyn SVG -->
+<link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'&gt;&lt;rect width='32' height='32' rx='8' fill='%230B0B0F'/&gt;&lt;path d='M8 8h5.5v6.5L19 8h6l-6.8 7.5L25 24h-6.2l-5.3-7v7H8V8z' fill='%237CFF6B'/&gt;&lt;/svg&gt;" rel="icon" type="image/svg+xml"/>
+<!-- Google Fonts: Inter & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              black: '#09090D',
+              surface: '#0E0E14',
+              graphite: '#14141C',
+              'graphite-light': '#1E1E2A',
+              purple: '#7A3BFF',
+              'purple-glow': '#945DFF',
+              green: '#7CFF6B',
+              'green-hover': '#6ce65d',
+              white: '#F4F4F6',
+              muted: '#8E8E9F',
+              border: 'rgba(255, 255, 255, 0.08)'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          },
+          letterSpacing: {
+            tighter: '-0.04em',
+            tight: '-0.02em',
+            wide: '0.08em',
+            wider: '0.14em'
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Reset & Base */
+    html {
+      background-color: #09090D;
+      color: #F4F4F6;
+    }
+    ::selection {
+      background-color: #7CFF6B;
+      color: #09090D;
+    }
+    
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #09090D;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1E1E2A;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #7A3BFF;
+    }
+
+    /* Text Shimmer Effect */
+    @keyframes textShimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .text-shimmer {
+      background: linear-gradient(90deg, #F4F4F6 0%, #FFFFFF 35%, #7CFF6B 50%, #FFFFFF 65%, #F4F4F6 100%);
+      background-size: 250% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textShimmer 7s ease-in-out infinite;
+    }
+
+    /* Glow Pulse Animation */
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.45; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(1.05); }
+    }
+    .animate-glow-pulse {
+      animation: pulseGlow 5s ease-in-out infinite;
+    }
+
+    /* 3D Float Animation */
+    @keyframes floatSculpture {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-14px) rotate(2.5deg); }
+    }
+    .animate-float-3d {
+      animation: floatSculpture 7s ease-in-out infinite;
+    }
+
+    /* Continuous Marquee Animations */
+    @keyframes marqueeLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes marqueeRight {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+
+    .marquee-track-left {
+      display: flex;
+      width: max-content;
+      animation: marqueeLeft 46s linear infinite;
+      will-change: transform;
+    }
+    .marquee-track-right {
+      display: flex;
+      width: max-content;
+      animation: marqueeRight 46s linear infinite;
+      will-change: transform;
+    }
+
+    .marquee-container:hover .marquee-track-left,
+    .marquee-container:hover .marquee-track-right,
+    .marquee-container:focus-within .marquee-track-left,
+    .marquee-container:focus-within .marquee-track-right,
+    .marquee-paused .marquee-track-left,
+    .marquee-paused .marquee-track-right {
+      animation-play-state: paused !important;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .animate-float-3d,
+      .text-shimmer,
+      .animate-glow-pulse,
+      .marquee-track-left,
+      .marquee-track-right {
+        animation: none !important;
+      }
+      .fade-in-element {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      #custom-cursor-dot,
+      #custom-cursor-follower {
+        display: none !important;
+      }
+    }
+
+    /* Smooth Entrance Reveal */
+    .fade-in-element {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .fade-in-element.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Card Aspect Ratio & Subtle Image Zoom */
+    .project-card {
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.4s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(124, 255, 107, 0.35);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85), 0 0 30px -5px rgba(124, 255, 107, 0.15);
+    }
+    .project-card img {
+      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .project-card:hover img {
+      transform: scale(1.04);
+    }
+
+    /* Spotlight gradient follow effect */
+    .spotlight-glow {
+      background: radial-gradient(circle 350px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(124,255,107,0.12), transparent 75%);
+    }
+
+    /* ========================================================
+       CUSTOM CURSOR & MAGNETIC HOVER / DYNAMIC GLOW STYLES
+       ======================================================== */
+    @media (pointer: fine) {
+      /* Cursor Elements Setup */
+      #custom-cursor-dot,
+      #custom-cursor-follower {
+        pointer-events: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        border-radius: 9999px;
+        z-index: 99999;
+        will-change: transform, width, height, background-color, border-color, opacity;
+      }
+
+      #custom-cursor-dot {
+        width: 6px;
+        height: 6px;
+        background-color: #7CFF6B;
+        box-shadow: 0 0 10px rgba(124, 255, 107, 0.8);
+        transform: translate(-50%, -50%);
+        transition: width 0.25s ease, height 0.25s ease, opacity 0.25s ease, background-color 0.25s ease;
+      }
+
+      #custom-cursor-follower {
+        width: 36px;
+        height: 36px;
+        border: 1.5px solid rgba(124, 255, 107, 0.45);
+        background-color: rgba(124, 255, 107, 0.03);
+        box-shadow: 0 0 16px rgba(124, 255, 107, 0.12);
+        transform: translate(-50%, -50%);
+        transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                    height 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                    border-color 0.3s ease, 
+                    background-color 0.3s ease, 
+                    box-shadow 0.3s ease,
+                    opacity 0.3s ease;
+      }
+
+      /* Hover States */
+      body.cursor-hover #custom-cursor-dot {
+        transform: translate(-50%, -50%) scale(1.4);
+        background-color: #FFFFFF;
+        box-shadow: 0 0 12px rgba(255, 255, 255, 0.9);
+      }
+
+      body.cursor-hover #custom-cursor-follower {
+        width: 58px;
+        height: 58px;
+        border-color: rgba(124, 255, 107, 0.75);
+        background-color: rgba(124, 255, 107, 0.12);
+        backdrop-filter: blur(2px);
+        box-shadow: 0 0 24px rgba(124, 255, 107, 0.35);
+      }
+
+      body.cursor-purple-hover #custom-cursor-follower {
+        border-color: rgba(122, 59, 255, 0.85);
+        background-color: rgba(122, 59, 255, 0.16);
+        box-shadow: 0 0 26px rgba(122, 59, 255, 0.45);
+      }
+      body.cursor-purple-hover #custom-cursor-dot {
+        background-color: #7A3BFF;
+        box-shadow: 0 0 12px rgba(122, 59, 255, 0.9);
+      }
+
+      body.cursor-hidden #custom-cursor-dot,
+      body.cursor-hidden #custom-cursor-follower {
+        opacity: 0;
+      }
+    }
+
+    @media (pointer: coarse) {
+      #custom-cursor-dot,
+      #custom-cursor-follower {
+        display: none !important;
+      }
+    }
+
+    /* Magnetic Elements Base */
+    .magnetic-element {
+      position: relative;
+      will-change: transform;
+      transition: transform 0.22s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* Dynamic Button Surface Glow Effect */
+    .magnetic-glow-btn {
+      position: relative;
+      overflow: hidden;
+      --glow-x: 50%;
+      --glow-y: 50%;
+      --glow-opacity: 0;
+    }
+
+    .magnetic-glow-btn::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      background: radial-gradient(130px circle at var(--glow-x, 50%) var(--glow-y, 50%), rgba(255, 255, 255, 0.35), transparent 70%);
+      opacity: var(--glow-opacity, 0);
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .magnetic-glow-btn.glow-purple::before {
+      background: radial-gradient(160px circle at var(--glow-x, 50%) var(--glow-y, 50%), rgba(122, 59, 255, 0.45), rgba(124, 255, 107, 0.2), transparent 75%);
+    }
+
+    .magnetic-glow-btn.glow-dark::before {
+      background: radial-gradient(150px circle at var(--glow-x, 50%) var(--glow-y, 50%), rgba(124, 255, 107, 0.3), rgba(122, 59, 255, 0.2), transparent 70%);
+    }
+
+    /* Smooth Slide Switching */
+    .service-slide {
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+  </style>
+</head>
+<body class="bg-brand-black text-brand-white font-sans antialiased overflow-x-hidden selection:bg-brand-green selection:text-brand-black">
+<!-- Custom Cursor HTML Markup (Desktop Pointer Only) -->
+<div aria-hidden="true" id="custom-cursor-dot"></div>
+<div aria-hidden="true" id="custom-cursor-follower"></div>
+<!-- Acessibilidade: Skip Link -->
+<a class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[100] px-4 py-2 bg-brand-green text-brand-black font-semibold rounded-md" href="#hero">
+    Pular para o conteúdo principal
+  </a>
+<!-- ==========================================
+       1. HEADER (FIXO / BLUR ULTRA GLASS)
+       ========================================== -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#09090D]/80 backdrop-blur-xl border-b border-white/[0.06] transition-all duration-300">
+<div class="max-w-7xl mx-auto px-6 sm:px-8 h-20 flex items-center justify-between">
+<!-- Logo Koyn com Wordmark & Símbolo -->
+<a aria-label="Koyn Agency Home" class="magnetic-element flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-brand-green rounded-lg py-1 px-1 cursor-pointer" href="#hero">
+<div class="w-9 h-9 rounded-xl bg-brand-graphite border border-white/10 flex items-center justify-center group-hover:border-brand-green/50 transition-colors shadow-inner">
+<svg class="w-5 h-5 text-brand-green transition-transform duration-300 group-hover:scale-110" fill="currentColor" viewbox="0 0 24 24">
+<path d="M4 3h5v7.2L16.2 3H22l-8.5 9.2L22 21h-5.8l-7.2-8.8V21H4V3z"></path>
+</svg>
+</div>
+<span class="text-xl font-bold tracking-tight text-brand-white group-hover:text-brand-green transition-colors">
+          koyn<span class="text-brand-purple">.</span>
+</span>
+</a>
+<!-- Navegação Principal -->
+<nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+<a class="text-brand-muted hover:text-brand-white transition-colors py-2 relative group focus:outline-none focus:text-brand-white cursor-pointer" href="#projetos">
+          Projetos
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-green transition-all duration-200 group-hover:w-full"></span>
+</a>
+<a class="text-brand-muted hover:text-brand-white transition-colors py-2 relative group focus:outline-none focus:text-brand-white cursor-pointer" href="#servicos">
+          O que fazemos
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-green transition-all duration-200 group-hover:w-full"></span>
+</a>
+<a class="text-brand-muted hover:text-brand-white transition-colors py-2 relative group focus:outline-none focus:text-brand-white cursor-pointer" href="#processo">
+          Processo
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-green transition-all duration-200 group-hover:w-full"></span>
+</a>
+</nav>
+<!-- CTA Header (WhatsApp) -->
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-brand-graphite/60 border border-white/5 text-[11px] font-mono text-brand-muted">
+<span class="w-1.5 h-1.5 rounded-full bg-brand-green animate-ping"></span>
+<span>DISPONÍVEL Q2</span>
+</div>
+<a class="magnetic-element magnetic-glow-btn inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full text-xs font-semibold tracking-wide bg-brand-graphite hover:bg-brand-graphite-light text-brand-white border border-white/10 hover:border-brand-green/40 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-green shadow-sm group cursor-pointer" href="https://wa.me/5548998161360?text=Ol%C3%A1%2C%20quero%20conversar%20sobre%20um%20projeto%20com%20a%20Koyn." rel="noopener noreferrer" target="_blank">
+<span class="w-2 h-2 rounded-full bg-brand-green relative z-10"></span>
+<span class="relative z-10">Vamos conversar</span>
+<svg class="w-3.5 h-3.5 text-brand-muted group-hover:text-brand-green group-hover:translate-x-0.5 transition-all relative z-10" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+</svg>
+</a>
+</div>
+</div>
+</header>
+<!-- ==========================================
+       2. HERO SECTION — NOTEBOOK 3D & COMPOSIÇÃO EDITORIAL
+       ========================================== -->
+<section class="relative pt-32 pb-24 md:pt-44 md:pb-32 overflow-hidden min-h-[96vh] flex flex-col justify-between" id="hero">
+<!-- Imagem de Fundo de Estúdio Tech com Luzes Volumétricas e Estilhaços de Vidro -->
+<div class="absolute inset-0 pointer-events-none select-none z-0">
+<img alt="Atmosfera de estúdio digital com grid de precisão e luzes caústicas de vidro" class="w-full h-full object-cover object-center opacity-30 mix-blend-screen" src="https://lh3.googleusercontent.com/aida/AEtjO1VaRS4XDdrWhXMdRZUYHM6a5h6A8ayxsmAnu-gllkrrLWw_Mr4UhlY1pjwzDx45Ge5Fk4FYkqG4MBhI8mQjJNRA8uj2c4hT_F_QghNfnYZA-vMk3VA8HgmP8E2zRKXYQia01ftzLZ6cIyE2S1Q1HU9t827E_xHOIs6hoqZBf8I29pJq4qe2Fn6iWOlJlbcGAJBUwq5-zA7QLUOLdtTo8nP0Me7QExZwbAssuhVrNA"/>
+<div class="absolute inset-0 bg-gradient-to-b from-[#09090D] via-transparent to-[#09090D] opacity-90"></div>
+<div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_40%,rgba(124,255,107,0.08),transparent_50%)]"></div>
+<div class="absolute top-1/4 -right-16 w-[500px] h-[500px] bg-brand-purple/15 rounded-full blur-[140px] pointer-events-none animate-glow-pulse"></div>
+<div class="absolute bottom-1/4 -left-16 w-[450px] h-[450px] bg-brand-green/10 rounded-full blur-[150px] pointer-events-none"></div>
+</div>
+<div class="max-w-7xl mx-auto px-6 sm:px-8 w-full relative z-10 my-auto">
+<!-- Top Micro-labels e Metadados Técnicos de Estúdio -->
+<div class="flex flex-wrap items-center justify-between gap-4 mb-10 text-xs font-mono tracking-wider text-brand-muted uppercase fade-in-element">
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-graphite/80 border border-white/10 backdrop-blur-md">
+<span class="w-2 h-2 rounded-full bg-brand-green animate-pulse"></span>
+<span class="text-brand-white font-medium">ESTÚDIO DIGITAL / BRASIL</span>
+</span>
+<span class="hidden sm:inline-block text-white/20">/</span>
+<span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.03] border border-white/5">
+<span>27°35'S 48°32'W</span>
+</span>
+</div>
+<div class="flex items-center gap-2 text-[11px] text-brand-white/60">
+<span class="text-brand-green">●</span>
+<span>AVAILABLE FOR Q2 PROJECTS</span>
+</div>
+</div>
+<!-- Grid Principal: Tipografia Monumental à Esquerda & Composição 3D Hiper-Refinada à Direita -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+<!-- Coluna de Texto & Call To Action -->
+<div class="lg:col-span-7 relative z-20">
+<div class="relative max-w-2xl">
+<!-- Título Monumental com Text Shimmer e Spotlight no Presença -->
+<h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-extrabold leading-[1.03] tracking-tighter text-brand-white fade-in-element">
+              Seu trabalho<br/>
+              merece essa<br/>
+<span class="relative inline-block mt-1">
+<!-- Halo de luz e reflexo neon na palavra destaque -->
+<span class="absolute -inset-2 bg-brand-green/20 blur-2xl rounded-full pointer-events-none -z-10"></span>
+<span class="text-brand-green drop-shadow-[0_0_40px_rgba(124,255,107,0.35)] text-shimmer">presença.</span>
+</span>
+</h1>
+<!-- Parágrafo Editorial com Alto Contraste -->
+<p class="mt-8 text-lg sm:text-xl md:text-2xl text-brand-white/80 font-normal leading-relaxed max-w-xl fade-in-element">
+              Criamos sites que traduzem o valor do seu trabalho. Da primeira impressão à próxima conversa.
+            </p>
+<!-- Ações Principais -->
+<div class="mt-10 flex flex-wrap items-center gap-4 fade-in-element">
+<a class="magnetic-element magnetic-glow-btn inline-flex items-center gap-3 px-8 py-4 rounded-xl font-semibold text-sm sm:text-base bg-brand-green text-brand-black hover:bg-brand-green-hover transition-all duration-200 shadow-[0_12px_30px_-5px_rgba(124,255,107,0.35)] focus:outline-none focus:ring-4 focus:ring-brand-green/30 group cursor-pointer" href="https://wa.me/5548998161360?text=Ol%C3%A1%2C%20quero%20conversar%20sobre%20um%20projeto%20com%20a%20Koyn." rel="noopener noreferrer" target="_blank">
+<span class="relative z-10">Solicitar projeto</span>
+<svg class="w-4 h-4 text-brand-black group-hover:translate-x-1 transition-transform relative z-10" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+</a>
+<a class="magnetic-element magnetic-glow-btn inline-flex items-center gap-2 px-6 py-4 rounded-xl font-medium text-sm sm:text-base text-brand-white/80 hover:text-brand-white hover:bg-white/[0.05] border border-white/10 hover:border-white/20 transition-all focus:outline-none focus:ring-2 focus:ring-white/20 cursor-pointer" href="#projetos">
+<span class="relative z-10">Ver projetos recentes</span>
+<svg class="w-4 h-4 text-brand-muted relative z-10" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</div>
+<!-- Features / Tags Rápidas -->
+<div class="mt-12 flex flex-wrap items-center gap-3 pt-6 border-t border-white/[0.08] fade-in-element">
+<span class="text-xs font-mono text-brand-muted uppercase">CAPACIDADES:</span>
+<span class="px-2.5 py-1 rounded-md bg-white/[0.04] text-[11px] font-mono text-brand-white/80 border border-white/5">DIREÇÃO DE ARTE</span>
+<span class="px-2.5 py-1 rounded-md bg-white/[0.04] text-[11px] font-mono text-brand-white/80 border border-white/5">WEBSITES ULTRA FAST</span>
+<span class="px-2.5 py-1 rounded-md bg-white/[0.04] text-[11px] font-mono text-brand-white/80 border border-white/5">ALTA CONVERSÃO</span>
+</div>
+</div>
+</div>
+<!-- Coluna da Direita: Mockup 3D MacBook Pro + Escultura de Vidro Esmeralda Flutuante -->
+<div class="lg:col-span-5 relative fade-in-element flex items-center justify-center">
+<div class="relative w-full max-w-lg lg:max-w-none group">
+<!-- Glow volumétrico traseiro do notebook -->
+<div class="absolute -inset-4 bg-gradient-to-tr from-brand-purple/20 via-brand-green/20 to-transparent blur-3xl opacity-70 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+<!-- Mockup Principal 3D: MacBook Pro com interface Koyn e reflexos cinematográficos -->
+<div class="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0E0E14] backdrop-blur-md transform transition-all duration-700 group-hover:scale-[1.015]">
+<img alt="Mockup 3D em alta resolução do MacBook Pro exibindo o design do estúdio Koyn Agency com reflexos e iluminação verde neon" class="w-full h-auto object-cover rounded-2xl select-none" src="https://lh3.googleusercontent.com/aida/AEtjO1X7vo1tvAWzBDpiOp4XdYqGzY6PtjcasJH6HB-rhP1gCG7Q7Lck5TJRkQeNS4nHVUI6rAXtTaKu1orN93ubc6RoUlVHuSL12LkTHWwR6P2GSLZ7PDVrN_lBcJHjaAx9oXb8-hNUncostmVRdv1rJtHcdxl0BSFdU22RyzHmNY6lhC355Pst1FfTYqSfnqAjDsDoH9OLV1s_e1-Oj3S_jwy5chWtrcBuB1FL3qUsGVQ"/>
+<!-- Reflexo de vidro overlay sutil -->
+<div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-transparent pointer-events-none"></div>
+</div>
+<!-- Escultura 3D Flutuante de Cristal Esmeralda e Cromo -->
+<div class="absolute -top-12 -right-8 sm:-top-16 sm:-right-12 w-28 h-28 sm:w-36 sm:h-36 lg:w-40 lg:h-40 z-30 pointer-events-none drop-shadow-[0_15px_35px_rgba(0,0,0,0.8)] animate-float-3d">
+<img alt="Escultura geométrica 3D de cristal esmeralda e cromo refinado" class="w-full h-full object-contain filter drop-shadow-[0_0_25px_rgba(124,255,107,0.35)]" src="https://lh3.googleusercontent.com/aida/AEtjO1Xw_vCZOlij9_xndazN4_qAw1zARqqcXPdKS5G5Lls_Wm-6wpzLTpI0GVVDqnBq1bRGB0la4HpjG0YL9FfZ2l0fmwSJroCmN2Px87GtaseWh9l9EiqhXvqsbGikRDY_7zlBcu5ys4sMBXcww65IdViGQigZ-Agqr8C6GydpbLFdZ82VJxadDZOKwg1tRAAoGgykIqgj6qyMY4ZsJxVEVoC5bqzXe3DdU1oCmSE8DFA"/>
+</div>
+<!-- Badge Glassmórfico de Precisão anexado ao mockup -->
+<div class="absolute -bottom-5 left-6 sm:left-10 px-4 py-2.5 rounded-xl bg-brand-graphite/90 border border-white/15 backdrop-blur-md shadow-xl flex items-center gap-3 z-30">
+<span class="w-2.5 h-2.5 rounded-full bg-brand-green animate-pulse"></span>
+<span class="text-xs font-mono text-brand-white font-medium tracking-wide">PRECISION DESIGN SYSTEM</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Base da Hero: Linha fina & metadados mono -->
+<div class="max-w-7xl mx-auto px-6 sm:px-8 w-full mt-16 pt-8 border-t border-white/[0.08] relative z-10 fade-in-element">
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-mono text-brand-muted tracking-wider">
+<div class="flex items-center gap-2.5 text-brand-white/70">
+<svg class="w-4 h-4 text-brand-green animate-bounce" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>SCROLL PARA EXPLORAR</span>
+</div>
+<div class="tracking-widest uppercase text-brand-muted">
+          ESTRATÉGIA. DESIGN. DESENVOLVIMENTO.
+        </div>
+</div>
+</div>
+</section>
+<!-- ==========================================
+       3. APRESENTAÇÃO (01 / A KOYN)
+       ========================================== -->
+<section class="py-28 sm:py-36 border-t border-white/[0.06] relative bg-[#09090D]" id="sobre">
+<div class="max-w-7xl mx-auto px-6 sm:px-8">
+<!-- Rótulo Seção -->
+<div class="font-mono text-xs tracking-wider text-brand-purple uppercase mb-8 sm:mb-12 fade-in-element flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-brand-purple"></span>
+<span>01 / A KOYN</span>
+</div>
+<!-- Composição Assimétrica Editorial de Alto Impacto -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-14 items-start">
+<div class="lg:col-span-8 fade-in-element">
+<h2 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08]">
+<span class="text-brand-white">Você faz um trabalho incrível.</span><br/>
+<span class="text-[#8E8E9F] font-semibold bg-gradient-to-r from-[#8E8E9F] via-white/80 to-[#8E8E9F] bg-clip-text text-transparent">Vamos mostrar isso ao mundo.</span>
+</h2>
+</div>
+<div class="lg:col-span-4 lg:pt-3 fade-in-element">
+<div class="relative p-6 sm:p-7 rounded-2xl bg-brand-graphite/40 border border-white/[0.08] backdrop-blur-sm shadow-xl">
+<div class="absolute -top-2 left-6 px-2.5 py-0.5 rounded-full bg-brand-purple/20 border border-brand-purple/40 text-[10px] font-mono text-brand-purple uppercase">
+              MANIFESTO
+            </div>
+<p class="text-base sm:text-lg text-brand-white/85 leading-relaxed font-normal mt-2">
+              Transformamos o que torna seu negócio único em uma presença digital clara, profissional e feita para aproximar as pessoas certas.
+            </p>
+<div class="mt-6 pt-5 border-t border-white/[0.06] flex items-center justify-between text-xs font-mono text-brand-muted">
+<span class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-brand-green"></span>
+<span>Posicionamento de alto nível</span>
+</span>
+<span class="text-brand-purple font-semibold">ESTÚDIO</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ==========================================
+       4. PORTFÓLIO — PROJETOS SELECIONADOS
+          (02 / PROJETOS SELECIONADOS)
+       ========================================== -->
+<section class="py-28 sm:py-36 bg-[#0B0B11] border-y border-white/[0.06] overflow-hidden relative" id="projetos">
+<!-- Cabeçalho da Seção -->
+<div class="max-w-7xl mx-auto px-6 sm:px-8 mb-14 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<div class="font-mono text-xs tracking-wider text-brand-green uppercase mb-3 fade-in-element flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-brand-green"></span>
+<span>02 / PROJETOS SELECIONADOS</span>
+</div>
+<h2 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-brand-white fade-in-element">
+          Design em ação.
+        </h2>
+</div>
+<!-- Controle de Pausa do Carrossel -->
+<div class="flex items-center gap-4 fade-in-element">
+<span class="hidden sm:inline-block text-xs font-mono text-brand-muted">
+          Passe o mouse ou use o botão para pausar
+        </span>
+<button aria-label="Pausar animação dos carrosséis de projetos" aria-pressed="false" class="magnetic-element magnetic-glow-btn inline-flex items-center gap-2.5 px-4 py-2.5 rounded-lg bg-brand-graphite hover:bg-brand-graphite-light border border-white/10 text-xs font-mono text-brand-white transition-all focus:outline-none focus:ring-2 focus:ring-brand-green cursor-pointer shadow-md" id="toggle-marquee-btn">
+<span class="w-2 h-2 rounded-sm bg-brand-green relative z-10" id="marquee-btn-icon"></span>
+<span class="relative z-10" id="marquee-btn-text">Pausar movimento</span>
+</button>
+</div>
+</div>
+<!-- Container dos Carrosséis Contínuos (2 faixas em sentidos opostos) -->
+<div aria-label="Galeria de projetos em carrossel contínuo" class="marquee-container space-y-6 sm:space-y-8 select-none" id="marquee-wrapper">
+<!-- FAIXA 1: Movimento contínuo para a ESQUERDA -->
+<div class="overflow-hidden w-full relative">
+<div class="marquee-track-left">
+<!-- SET 1 (4 Projetos Reais) -->
+<div class="flex gap-6 sm:gap-8 pr-6 sm:pr-8">
+<!-- Card 1: O Casal que faz Móveis -->
+<a class="project-card group block w-[340px] sm:w-[500px] flex-shrink-0 bg-brand-graphite rounded-2xl border border-white/[0.08] overflow-hidden focus:outline-none focus:ring-2 focus:ring-brand-green cursor-pointer" href="https://ocasalquefazmoveis.com.br/" rel="noopener noreferrer" target="_blank">
+<div class="aspect-[16/9] w-full overflow-hidden bg-black/80 relative">
+<img alt="Screenshot real do projeto O Casal que faz Móveis" class="w-full h-full object-cover object-center" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBt9I0VT3qOmkUYxn8aEh6NN35_wt0vnMQKA6gjDYg4NtRk94kOEK6juVDMpBm1d0bpVkPsOSOABtj77kx-cKloXdscWkn3iq-xqOLBN_LPOLsr1VbmtbPefKO_ZzzUzhbGzTl--mu1I4QeUxLJSpZc3aeSUNNv3-J8SuBHrVtnOlh0NcGZFLPe61yiMugBRhwg1BGFPpvBknftE-m3vErECr39ig7mBmIib9RIK6kEY7mYvFoQn9c"/>
+<div class="absolute inset-0 bg-gradient-to-t from-brand-graphite via-transparent to-transparent opacity-60"></div>
+<div class="absolute top-3.5 right-3.5 px-3 py-1 rounded-md bg-black/80 backdrop-blur-md text-[11px] font-mono text-brand-green border border-white/15 shadow-lg flex items-center gap-1.5">
+<span>Visitar</span>
+<span>↗</span>
+</div>
+<div class="absolute bottom-3 left-3 px-2.5 py-0.5 rounded bg-black/60 backdrop-blur-sm text-[10px] font-mono text-brand-white/80 border border-white/10">
+                  CASE STUDY
+                </div>
+</div>
+<div class="p-5 sm:p-6 flex items-center justify-between gap-4">
+<div>
+<h3 class="text-base sm:text-lg font-bold text-brand-white group-hover:text-brand-green transition-colors">
+                    O Casal que faz Móveis
+                  </h3>
+<p class="text-xs font-mono text-brand-muted mt-1">Site Institucional • Mobiliário Autoral</p>
+</div>
+<div class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-brand-muted group-hover:bg-brand-green group-hover:text-brand-black transition-colors">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</a>
+<!-- Card 2: Eduarda Venerio -->
+<a class="project-card group block w-[340px] sm:w-[500px] flex-shrink-0 bg-brand-graphite rounded-2xl border border-white/[0.08] overflow-hidden focus:outline-none focus:ring-2 focus:ring-brand-green cursor-pointer" href="https://eduardaveneriopsi.netlify.app/" rel="noopener noreferrer" target="_blank">
+<div class="aspect-[16/9] w-full overflow-hidden bg-black/80 relative">
+<img alt="Screenshot real do projeto Eduarda Venerio Psicologia Clínica" class="w-full h-full object-cover object-center" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_HG7BEmbmL4NpoZHDx_8sUJNKaU1tM4nVeCoF32thq84jnFHz4WcfmD3gdMJcQcu-yAav_RV159KaJOs8pY_-rEhmPOyOrzsMj1_8_30Hqh0IU40pz-Bri9SQXeFUKs9qfJqYtSbk8xHVyB5wPHuN3aY72o6a7vFOK7Ko3iLqRW4N7JtbWw3ZJFHEKEALHCWLB1Gkkmk-c4h23wteGS3KeISczhTFwijRYOlTGPde8SAcmH7FGTU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-brand-graphite via-transparent to-transparent opacity-60"></div>
+<div class="absolute top-3.5 right-3.5 px-3 py-1 rounded-md bg-black/80 backdrop-blur-md text-[11px] font-mono text-brand-green border border-white/15 shadow-lg flex items-center gap-1.5">
+<span>Visitar</span>
+<span>↗</span>
+</div>
+<div class="absolute bottom-3 left-3 px-2.5 py-0.5 rounded bg-black/60 backdrop-blur-sm text-[10px] font-mono text-brand-white/80 border border-white/10">
+                  HEALTHCARE
+                </div>
+</div>
+<div class="p-5 sm:p-6 flex items-center justify-between gap-4">
+<div>
+<h3 class="text-base sm:text-lg font-bold text-brand-white group-hover:text-brand-green transition-colors">
+                    Eduarda Venerio
+                  </h3>
+<p class="text-xs font-mono text-brand-muted mt-1">Psicologia Clínica • Avaliação</p>
+</div>
+<div class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-brand-muted group-hover:bg-brand-green group-hover:text-brand-black transition-colors">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</a>
+<!-- Card 3: Marilúcia Valério -->
+<a class="project-card group block w-[340px] sm:w-[500px] flex-shrink-0 bg-brand-graphite rounded-2xl border border-white/[0.08] overflow-hidden focus:outline-none focus:ring-2 focus:ring-brand-green cursor-pointer" href="https://mariluciavalerio-psi.netlify.app/" rel="noopener noreferrer" target="_blank">
+<div class="aspect-[16/9] w-full overflow-hidden bg-black/80 relative">
+<img alt="Screenshot real do projeto Marilúcia Valério Psicologia" class="w-full h-full object-cover object-center" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOW_i_9yFMSxqGhieCEWc0VHMfMXy3T0VqjWCenHF1v1tzfT3HnbwBEtrhyWZZNXOba7zerpINh1yNowVqXGCtN0xyrgMWvuhek2wOKVp6RroRq4-6mRKzVAMxjuM9mR6ZmLh78FP7Go6UVSCW1hLes28C0Nmo69J_t6g-iR5Oh9Xhjew9FrvpqjKqXBvIK-husQU-wBWZ_-fiIdP_qgZ-4lWenxCTyHkfJTwQLn8hgWonr9ZoVLk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-brand-graphite via-transparent to-transparent opacity-60"></div>
+<div class="absolute top-3.5 right-3.5 px-3 py-1 rounded-md bg-black/80 backdrop-blur-md text-[11px] font-mono text-brand-green border border-white/15 shadow-lg flex items-center gap-1.5">
+<span>Visitar</span>
+<span>↗</span>
+</div>
+<div class="absolute bottom-3 left-3 px-2.5 py-0.5 rounded bg-black/60 backdrop-blur-sm text-[10px] font-mono text-brand-white/80 border border-white/10">
+                  CLINICAL
+                </div>
+</div>
+<div class="p-5 sm:p-6 flex items-center justify-between gap-4">
+<div>
+<h3 class="text-base sm:text-lg font-bold text-brand-white group-hover:text-brand-green transition-colors">
+                    Marilúcia Valério
+                  </h3>
+<p class="text-xs font-mono text-brand-muted mt-1">Psicologia Clínica &amp; Psicoterapia</p>
+</div>
+<div class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-brand-muted group-hover:bg-brand-green group-hover:text-brand-black transition-colors">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</a>
+<!-- Card 4: Raquel Soares -->
+<a class="project-card group block w-[340px] sm:w-[500px] flex-shrink-0 bg-brand-graphite rounded-2xl border border-white/[0.08] overflow-hidden focus:outline-none focus:ring-2 focus:ring-brand-green cursor-pointer" href="https://raquelsoares-psi.netlify.app/" rel="noopener noreferrer" target="_blank">
+<div class="aspect-[16/9] w-full overflow-hidden bg-black/80 relative">
+<img alt="Screenshot real do projeto Raquel Soares Psicologia Clínica TCC" class="w-full h-full object-cover object-center" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeYPs_vRDq_Mbl5XORD-DdaGjnEPUBNyjqm8M3SsRbXPv3mrHQAmLtNvifZkYnTkmzoK82nTPkKWpswYWG556-vJQq-27AhBMy83R_0oNczIChjDI48W9XICOG-6eF89_LDhR3GLM5UyM1f6sj-nGd2cyQEFLLH41he4Fz3q_ochmroxEueFNrKZUSV8bSx54dHT_hRBR-2KKGcJ5ezzrj5x_JMesojc4c0gMcfKlI7Z2Aa5biloU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-brand-graphite via-transparent to-transparent opacity-60"></div>
+<div class="absolute top-3.5 right-3.5 px-3 py-1 rounded-md bg-black/80 backdrop-blur-md text-[11px] font-mono text-brand-green border border-white/15 shadow-lg flex items-center gap-1.5">
+<span>Visitar</span>
+<span>↗</span>
+</div>
+<div class="absolute bottom-3 left-3 px-2.5 py-0.5 rounded bg-black/60 backdrop-blur-sm text-[10px] font-mono text-brand-white/80 border border-white/10">
+                  SPECIALIST
+                </div>
+</div>
+<div class="p-5 sm:p-6 flex items-center justify-between gap-4">
+<div>
+<h3 class="text-base sm:text-lg font-bold text-brand-white group-hover:text-brand-green transition-colors">
+                    Raquel Soares
+                  </h3>
+<p class="text-xs font-mono text-brand-muted mt-1">Psicologia Clínica TCC</p>
+</div>
+<div class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-brand-muted group-hover:bg-brand-green group-hover:text-brand-black transition-colors">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</a>
+</div>
+<!-- SET 2 (Loop contínuo idêntico - aria-hidden e tabindex=-1) -->
+<div aria-hidden="true" class="flex gap-6 sm:gap-8 pr-6 sm:pr-8">
+<a class="project-card group block w-[340px] sm:w-[500px] flex-shrink-0 bg-brand-graphite rounded-2xl border border-white/[0.08] overflow-hidden pointer-events-auto cursor-pointer" href="https://ocasalquefazmoveis.com.br/" tabindex="-1" target="_blank">
+<div class="aspect-[16/9] w-full overflow-hidden bg-black/80 relative">
+<img alt="" class="w-full h-full object-cover object-center" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANNDcY0HkYQgIDgdT4Ovi43Cv1f0bd-CYgJg6J0PFCk2Oqjhp_3N4fsOJb4j_4yRf2J1VVnwmT1yEIWotEPMHg5WHYbTegyTY4NKcg-Ha_hLSaWJ86SkUbN5VPNqECrtqo5NUpBrbUFJUpCyymgxP6Cd4wZf0tIC-0_sm3oAKyqUS3vIjmzTeFP1Ux-wWt4Xh-LRWLZ6t9vnItJJwkzc8ROlSuaOCEdUG4vzkwZsWKU6AwOXW5Ktg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-brand-graphite via-transparent to-transparent opacity-60"></div>
+</div>
+<div class="p-5 sm:p-6 flex items-center justify-between gap-4">
+<div>
+<h3 class="text-base sm:text-lg font-bold text-brand-white group-hover:text-brand-green transition-colors">O Casal que faz Móveis</h3>
+<p class="text-xs font-mono text-brand-muted mt-1">Site Institucional • Mobiliário Autoral</p>
+</div>
+</div>
+</a>
+<a class="project-card group block w-[340px] sm:w-[500px] flex-shrink-0 bg-brand-graphite rounded-2xl border border-white/[0.08] overflow-hidden pointer-events-auto cursor-pointer" href="https://eduardaveneriopsi.netlify.app/" tabindex="-1" target="_blank">
+<div class="aspect-[16/9] w-full overflow-hidden bg-black/80 relative">
+<img alt="" class="w-full h-full object-cover object-center" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCumtQuNREF6KplKESsM_n4051v65Cf8D2a96oUIYfIpCKSVS3ClgLOhigbUdwCLg-GZi610Zg8fmezZ_LbDxZZC0CJ7CINGz7OHRWN6CXLf6ZanIEgQ8PJh9tZ0jEkvZ3wB5lztD5BpHtVM92_Yzr8OBS1KHa_58b0RvxPRVGkI8mKyUC9umFhxaH5g7QpHxfD2Bwa-Qtr91nweWrg3iC6Nmf_jlbi_O9mCGR3_ocb7VAGlwJ7b9g"/>
+<div class="absolute inset-0 bg-gradient-to-t from-brand-graphite via-transparent to-transparent opacity-60"></div>
+</div>
+<div class="p-5 sm:p-6 flex items-center justify-between gap-4">
+<div>
+<h3 class="text-base sm:text-lg font-bold text-brand-white group-hover:text-brand-green transition-colors">Eduarda Venerio</h3>
+<p class="text-xs font-mono text-brand-muted mt-1">Psicologia Clínica • Avaliação</p>
+</div>
+</div>
+</a>
+<a class="project-card group block w-[340px] sm:w-[500px] flex-shrink-0 bg-brand-graphite rounded-2xl border border-white/[0.08] overflow-hidden pointer-events-auto cursor-pointer" href="https://mariluciavalerio-psi.netlify.app/" tabindex="-1" target="_blank">
+<div class="aspect-[16/9] w-full overflow-hidden bg-black/80 relative">
+<img alt="" class="w-full h-full object-cover object-center" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqtaerDH20mnpmtQKXkMuPeUPMqWZfZU7DNOXXeIVrK61LkdxDOVxJeZ4XUZEH-ICim8-rWxNaMXxUCogzR2gMiInejEbPfF7SXIMVmH9bsVBSFaT4iaW9IoDnUhi19Rrjoz2Ryra7vm1vdweksBcgEMqZm6gWmB_sPicJxOEUtD-V9v-9qR2n-_jLV8S13Q74y9rKCnDW_7QHquECiJSfqtyUaUVmKyGAIa9rjXLknjSj5ORfCQ4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-brand-graphite via-transparent to-transparent opacity-60"></div>
+</div>
+<div class="p-5 sm:p-6 flex items-center justify-between gap-4">
+<div>
+<h3 class="text-base sm:text-lg font-bold text-brand-white group-hover:text-brand-green transition-colors">Marilúcia Valério</h3>
+<p class="text-xs font-mono text-brand-muted mt-1">Psicologia Clínica &amp; Psicoterapia</p>
+</div>
+</div>
+</a>
+<a class="project-card group block w-[340px] sm:w-[500px] flex-shrink-0 bg-brand-graphite rounded-2xl border border-white/[0.08] overflow-hidden pointer-events-auto cursor-pointer" href="https://raquelsoares-psi.netlify.app/" tabindex="-1" target="_blank">
+<div class="aspect-[16/9] w-full overflow-hidden bg-black/80 relative">
+<img alt="" class="w-full h-full object-cover object-center" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAh78Svl5r0086LyKTiy4T4t1XgeSlqGb1LJB6LARiSZcogaak8Qdx09gZMjiVa5KrkmoZqrSPAa56JF8TUEhMpzWlD6h1gae1KlMZc6aqkF65g3aRXkByxef-pVBGU6ozWvdb2Zfky7X9cxpm1PFROVwZCw_MdXbuYI1Nhv84ZWyz6OJr0JYc8LOez4BgZ8k_nGI3gmfgnnSIwfqx_Zx-lFBasd7vGOfltZlbwKU5aEpEHOVYeSkQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-brand-graphite via-transparent to-transparent opacity-60"></div>
+</div>
+<div class="p-5 sm:p-6 flex items-center justify-between gap-4">
+<div>
+<h3 class="text-base sm:text-lg font-bold text-brand-white group-hover:text-brand-green transition-colors">Raquel Soares</h3>
+<p class="text-xs font-mono text-brand-muted mt-1">Psicologia Clínica TCC</p>
+</div>
+</div>
+</a>
+</div>
+</div>
+</div>
+<!-- FAIXA 2: Movimento contínuo para a DIREITA -->
+<div class="overflow-hidden w-full relative">
+<div class="marquee-track-right">
+<!-- SET 1 (Ordem Inversa dos 4 Prints Reais) -->
+<div class="flex gap-6 sm:gap-8 pr-6 sm:pr-8">
+<!-- Card 4: Raquel Soares -->
+<a class="project-card group block w-[340px] sm:w-[500px] flex-shrink-0 bg-brand-graphite rounded-2xl border border-white/[0.08] overflow-hidden focus:outline-none focus:ring-2 focus:ring-brand-green cursor-pointer" href="https://raquelsoares-psi.netlify.app/" rel="noopener noreferrer" target="_blank">
+<div class="aspect-[16/9] w-full overflow-hidden bg-black/80 relative">
+<img alt="Screenshot real do projeto Raquel Soares Psicologia Clínica TCC" class="w-full h-full object-cover object-center" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGk8dBg9LqfwNSjGX9noUMIh9aVK55n522Xp0arf4M0cXJAjPmnZ0WLAdYRMPvD9-ZAugg0JQH-NR9s3sfi7yEDnauWzmsrPrV2zra7MgvPfHRE5el5fL_3GvCepPHcv-akmw6R__DARFxFxUB8wiO5s9WI4zG2U3aK8cHxEvRk8Le72q-yx5v-062_pFz3YOapfBHcyR4iPC_aQazrJSZ24QOWs1uJGmT671qzCLzhuWKHzPMxII"/>
+<div class="absolute inset-0 bg-gradient-to-t from-brand-graphite via-transparent to-transparent opacity-60"></div>
+<div class="absolute top-3.5 right-3.5 px-3 py-1 rounded-md bg-black/80 backdrop-blur-md text-[11px] font-mono text-brand-green border border-white/15 shadow-lg flex items-center gap-1.5">
+<span>Visitar</span>
+<span>↗</span>
+</div>
+<div class="absolute bottom-3 left-3 px-2.5 py-0.5 rounded bg-black/60 backdrop-blur-sm text-[10px] font-mono text-brand-white/80 border border-white/10">
+                  SPECIALIST
+                </div>
+</div>
+<div class="p-5 sm:p-6 flex items-center justify-between gap-4">
+<div>
+<h3 class="text-base sm:text-lg font-bold text-brand-white group-hover:text-brand-green transition-colors">
+                    Raquel Soares
+                  </h3>
+<p class="text-xs font-mono text-brand-muted mt-1">Psicologia Clínica TCC</p>
+</div>
+<div class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-brand-muted group-hover:bg-brand-green group-hover:text-brand-black transition-colors">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</a>
+<!-- Card 3: Marilúcia Valério -->
+<a class="project-card group block w-[340px] sm:w-[500px] flex-shrink-0 bg-brand-graphite rounded-2xl border border-white/[0.08] overflow-hidden focus:outline-none focus:ring-2 focus:ring-brand-green cursor-pointer" href="https://mariluciavalerio-psi.netlify.app/" rel="noopener noreferrer" target="_blank">
+<div class="aspect-[16/9] w-full overflow-hidden bg-black/80 relative">
+<img alt="Screenshot real do projeto Marilúcia Valério Psicologia" class="w-full h-full object-cover object-center" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4YxdcbtjrMgfRK_rmzVyyYMF_SlCxA1wiQpS3joNtDJpPyf9ipEh9_pG-dQlKYkhuYoiX_p5MhQ_CIp2uP0MamzsmbFP1HtjP721DKwjEmSZX60vOKyo3DcBSJXw93RVe0-_zvbN4yr1E1Z6vJpYKonFSgC3QAw0Bs7UyNDCRSeHLNLpRN69QEexSK_tDTIu-1WBqSBEBKMf63U87IDBWHKzAF273r9BIrBBvr3WhSfxpU3GUXDs"/>
+<div class="absolute inset-0 bg-gradient-to-t from-brand-graphite via-transparent to-transparent opacity-60"></div>
+<div class="absolute top-3.5 right-3.5 px-3 py-1 rounded-md bg-black/80 backdrop-blur-md text-[11px] font-mono text-brand-green border border-white/15 shadow-lg flex items-center gap-1.5">
+<span>Visitar</span>
+<span>↗</span>
+</div>
+<div class="absolute bottom-3 left-3 px-2.5 py-0.5 rounded bg-black/60 backdrop-blur-sm text-[10px] font-mono text-brand-white/80 border border-white/10">
+                  CLINICAL
+                </div>
+</div>
+<div class="p-5 sm:p-6 flex items-center justify-between gap-4">
+<div>
+<h3 class="text-base sm:text-lg font-bold text-brand-white group-hover:text-brand-green transition-colors">
+                    Marilúcia Valério
+                  </h3>
+<p class="text-xs font-mono text-brand-muted mt-1">Psicologia Clínica &amp; Psicoterapia</p>
+</div>
+<div class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-brand-muted group-hover:bg-brand-green group-hover:text-brand-black transition-colors">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</a>
+<!-- Card 2: Eduarda Venerio -->
+<a class="project-card group block w-[340px] sm:w-[500px] flex-shrink-0 bg-brand-graphite rounded-2xl border border-white/[0.08] overflow-hidden focus:outline-none focus:ring-2 focus:ring-brand-green cursor-pointer" href="https://eduardaveneriopsi.netlify.app/" rel="noopener noreferrer" target="_blank">
+<div class="aspect-[16/9] w-full overflow-hidden bg-black/80 relative">
+<img alt="Screenshot real do projeto Eduarda Venerio Psicologia Clínica" class="w-full h-full object-cover object-center" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrh9tY63Q4KTgYEyFyYQQlHJhWjGeSFG8GDf3CC2yKKDvLGy_G72nwvWlFXPit6c98-I0kEOemZwWc16R_Lb2xZ9QB_ZhA4IqvXffqLG-Vne-g4ZJIvHJ9Us3a0v1kJa0KqH8geYQf64u5xVXRRYeIMXLVnaQXN6Np9nLLh4jw-0uY7MlvDZGVc6i2QP9xq7DjEI6uA5129eDRPwDehBaHrzJT-BSwCe7G_GQuObrnPRIBbXi3Qk4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-brand-graphite via-transparent to-transparent opacity-60"></div>
+<div class="absolute top-3.5 right-3.5 px-3 py-1 rounded-md bg-black/80 backdrop-blur-md text-[11px] font-mono text-brand-green border border-white/15 shadow-lg flex items-center gap-1.5">
+<span>Visitar</span>
+<span>↗</span>
+</div>
+<div class="absolute bottom-3 left-3 px-2.5 py-0.5 rounded bg-black/60 backdrop-blur-sm text-[10px] font-mono text-brand-white/80 border border-white/10">
+                  HEALTHCARE
+                </div>
+</div>
+<div class="p-5 sm:p-6 flex items-center justify-between gap-4">
+<div>
+<h3 class="text-base sm:text-lg font-bold text-brand-white group-hover:text-brand-green transition-colors">
+                    Eduarda Venerio
+                  </h3>
+<p class="text-xs font-mono text-brand-muted mt-1">Psicologia Clínica • Avaliação</p>
+</div>
+<div class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-brand-muted group-hover:bg-brand-green group-hover:text-brand-black transition-colors">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</a>
+<!-- Card 1: O Casal que faz Móveis -->
+<a class="project-card group block w-[340px] sm:w-[500px] flex-shrink-0 bg-brand-graphite rounded-2xl border border-white/[0.08] overflow-hidden focus:outline-none focus:ring-2 focus:ring-brand-green cursor-pointer" href="https://ocasalquefazmoveis.com.br/" rel="noopener noreferrer" target="_blank">
+<div class="aspect-[16/9] w-full overflow-hidden bg-black/80 relative">
+<img alt="Screenshot real do projeto O Casal que faz Móveis" class="w-full h-full object-cover object-center" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAROJVPBKDJlr1wsZxPbUniC47XmvPydwNUeJwkzwsCIkf8mo70QB4n5pJojPovpBnZKdfQANtaurjo8Z2LNru7xJG20sBugkDiDJSwtgT53b1IS4jHY2_3pUG2EXR6ZiIJI1adEjv2eJls9GkIIGzS9kWo4QNh-QqwI30U7b23E4tAc6j3r72QeUidTH-4BC74u1TCAmXeDaCEfnZwSHxCtrn_ysPxzPybynWuqsYOTjOV6jTDT8U"/>
+<div class="absolute inset-0 bg-gradient-to-t from-brand-graphite via-transparent to-transparent opacity-60"></div>
+<div class="absolute top-3.5 right-3.5 px-3 py-1 rounded-md bg-black/80 backdrop-blur-md text-[11px] font-mono text-brand-green border border-white/15 shadow-lg flex items-center gap-1.5">
+<span>Visitar</span>
+<span>↗</span>
+</div>
+<div class="absolute bottom-3 left-3 px-2.5 py-0.5 rounded bg-black/60 backdrop-blur-sm text-[10px] font-mono text-brand-white/80 border border-white/10">
+                  CASE STUDY
+                </div>
+</div>
+<div class="p-5 sm:p-6 flex items-center justify-between gap-4">
+<div>
+<h3 class="text-base sm:text-lg font-bold text-brand-white group-hover:text-brand-green transition-colors">
+                    O Casal que faz Móveis
+                  </h3>
+<p class="text-xs font-mono text-brand-muted mt-1">Site Institucional • Mobiliário Autoral</p>
+</div>
+<div class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-brand-muted group-hover:bg-brand-green group-hover:text-brand-black transition-colors">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</a>
+</div>
+<!-- SET 2 (Loop contínuo idêntico - aria-hidden e tabindex=-1) -->
+<div aria-hidden="true" class="flex gap-6 sm:gap-8 pr-6 sm:pr-8">
+<a class="project-card group block w-[340px] sm:w-[500px] flex-shrink-0 bg-brand-graphite rounded-2xl border border-white/[0.08] overflow-hidden pointer-events-auto cursor-pointer" href="https://raquelsoares-psi.netlify.app/" tabindex="-1" target="_blank">
+<div class="aspect-[16/9] w-full overflow-hidden bg-black/80 relative">
+<img alt="" class="w-full h-full object-cover object-center" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIIVo-KKrgnn_v3mehOxZNACqE81CwZxARVXYDAI4mZuQFCYSCRMIkj1HHupMxhYevqkBtlsQsGSkv7w9sAEtsTjsgMRjPth27qg5OLoePPj-5BAu94aChqEnwaYRM8WwQR765KctTvLovt9kLedyTIJq3p0Qam7DbHiQV1VIJyptmVdk6MwMI9D8ljtUamzxVR1MEaZunEGYMsdLMpq49P_F0L8m1d_bJR17JzFrmsEIBQ0esArY"/>
+<div class="absolute inset-0 bg-gradient-to-t from-brand-graphite via-transparent to-transparent opacity-60"></div>
+</div>
+<div class="p-5 sm:p-6 flex items-center justify-between gap-4">
+<div>
+<h3 class="text-base sm:text-lg font-bold text-brand-white group-hover:text-brand-green transition-colors">Raquel Soares</h3>
+<p class="text-xs font-mono text-brand-muted mt-1">Psicologia Clínica TCC</p>
+</div>
+</div>
+</a>
+<a class="project-card group block w-[340px] sm:w-[500px] flex-shrink-0 bg-brand-graphite rounded-2xl border border-white/[0.08] overflow-hidden pointer-events-auto cursor-pointer" href="https://mariluciavalerio-psi.netlify.app/" tabindex="-1" target="_blank">
+<div class="aspect-[16/9] w-full overflow-hidden bg-black/80 relative">
+<img alt="" class="w-full h-full object-cover object-center" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2nVnoR4ylSlZMmEpLDS07lq93nNZ2hur6UrSaEemxXi82J-dygeUFwj4XdgnOdePmr-tbL5wwp9nhq91clVlj0mDCkzmjGsMEoU6vUDVn7U60-QmFiPnyC8QcDZf-Ov3l38JNTSd8lpbSUfmREHgF8W433ElN4T00uCp0vFr48GECemqD9wMD6phIVzfdPTb_-ZxfZhiT29W7y63HunvALwbTK4OSR2WsJIKYS6O3dRXls9Ar18g"/>
+<div class="absolute inset-0 bg-gradient-to-t from-brand-graphite via-transparent to-transparent opacity-60"></div>
+</div>
+<div class="p-5 sm:p-6 flex items-center justify-between gap-4">
+<div>
+<h3 class="text-base sm:text-lg font-bold text-brand-white group-hover:text-brand-green transition-colors">Marilúcia Valério</h3>
+<p class="text-xs font-mono text-brand-muted mt-1">Psicologia Clínica &amp; Psicoterapia</p>
+</div>
+</div>
+</a>
+<a class="project-card group block w-[340px] sm:w-[500px] flex-shrink-0 bg-brand-graphite rounded-2xl border border-white/[0.08] overflow-hidden pointer-events-auto cursor-pointer" href="https://eduardaveneriopsi.netlify.app/" tabindex="-1" target="_blank">
+<div class="aspect-[16/9] w-full overflow-hidden bg-black/80 relative">
+<img alt="" class="w-full h-full object-cover object-center" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlrOU_6N9rgZsy_25du-dYp4ZoaQvjpUPTQxu6LNHie0Zt2sQlN9kR3Pq0IPh8bEJm6oayV7qRgqj6RebM_wzVlqPlfPdiIx7EmjSi84eFhn7SHK0lryTpPWtHq0zC9f_cgM9XgNkQIvrieSNYq7yKCI-WiVMydsHjFjXzy7dwSkyEHJZ0RX7MGu1hdP4UfYid71CIWeNZmvoIf2i3wUY1-VeMnTSKrhT_LT2p7wZQsOY2YsBMlAo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-brand-graphite via-transparent to-transparent opacity-60"></div>
+</div>
+<div class="p-5 sm:p-6 flex items-center justify-between gap-4">
+<div>
+<h3 class="text-base sm:text-lg font-bold text-brand-white group-hover:text-brand-green transition-colors">Eduarda Venerio</h3>
+<p class="text-xs font-mono text-brand-muted mt-1">Psicologia Clínica • Avaliação</p>
+</div>
+</div>
+</a>
+<a class="project-card group block w-[340px] sm:w-[500px] flex-shrink-0 bg-brand-graphite rounded-2xl border border-white/[0.08] overflow-hidden pointer-events-auto cursor-pointer" href="https://ocasalquefazmoveis.com.br/" tabindex="-1" target="_blank">
+<div class="aspect-[16/9] w-full overflow-hidden bg-black/80 relative">
+<img alt="" class="w-full h-full object-cover object-center" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmFgRoOwqmagZ002R8cG6JBDw3BtZJQMg9jSXo_QcS5wRSXXzihCn_NLIQ4ovwkJ3vBSNFjKR21F3Zb3YZxyVsC_Us8ONe2oVGE2Nt5HRk_e6uP2t0GY_AAc7FblbuyP6aqfPIvEVzAirY-htQetayXikmt8L533mm151K3MT-C7uLXuW1v28k9iu2Wsb3IbFmaTXVy6l9xIW-tL22yms85GPoKR741KOKILJoaPJEYGQOnC5OqnQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-brand-graphite via-transparent to-transparent opacity-60"></div>
+</div>
+<div class="p-5 sm:p-6 flex items-center justify-between gap-4">
+<div>
+<h3 class="text-base sm:text-lg font-bold text-brand-white group-hover:text-brand-green transition-colors">O Casal que faz Móveis</h3>
+<p class="text-xs font-mono text-brand-muted mt-1">Site Institucional • Mobiliário Autoral</p>
+</div>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ==========================================
+       5. SERVIÇOS — ESTRUTURA DIRETA E ELEGANTE (SEM STICKY SCROLL / SEM VÃO MORTO)
+          (03 / O QUE FAZEMOS)
+       ========================================== -->
+<section class="py-24 sm:py-28 bg-brand-black border-b border-white/[0.06] relative" id="servicos">
+<div class="max-w-7xl mx-auto px-6 sm:px-8">
+<!-- Header da Seção -->
+<div class="w-full flex items-center justify-between mb-12 sm:mb-16 fade-in-element">
+<div class="font-mono text-xs tracking-wider text-brand-green uppercase flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-brand-green"></span>
+<span>03 / O QUE FAZEMOS</span>
+</div>
+<div class="text-xs font-mono text-brand-muted hidden sm:flex items-center gap-2">
+<span>CLIQUE PARA SELECIONAR</span>
+<span class="text-brand-green">✦</span>
+</div>
+</div>
+<!-- Layout Principal: Título + Seletor de Tabs à Esquerda e Painéis Interativos à Direita -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+<!-- Coluna Esquerda: Título Editorial e Abas de Navegação -->
+<div class="lg:col-span-5 pr-0 lg:pr-4 fade-in-element">
+<h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.1] text-brand-white mb-8">
+        Uma boa presença começa com <span class="text-brand-green drop-shadow-[0_0_20px_rgba(124,255,107,0.3)]">intenção.</span>
+</h2>
+<p class="text-sm sm:text-base text-brand-white/70 mb-8 leading-relaxed">
+        Soluções focadas em valor percebido e simplicidade operacional para cada fase do seu negócio.
+      </p>
+<!-- Indicadores Clicáveis 01, 02, 03 que alternam instantaneamente os cards -->
+<div aria-label="Navegação de Serviços" class="space-y-3 font-mono text-xs tracking-wider" role="tablist">
+<button aria-selected="true" class="svc-tab-btn magnetic-element w-full text-left p-4 rounded-xl border flex items-center justify-between transition-all duration-300 bg-brand-graphite text-brand-white border-brand-green/40 shadow-lg cursor-pointer" id="svc-tab-0" onclick="selectServiceTab(0)" role="tab">
+<span class="flex items-center gap-3">
+<span class="tab-num text-brand-green font-bold">01</span>
+<span class="tracking-widest uppercase">PRESENÇA — SITES</span>
+</span>
+<span class="tab-dot w-2 h-2 rounded-full bg-brand-green shadow-[0_0_8px_#7CFF6B]"></span>
+</button>
+<button aria-selected="false" class="svc-tab-btn magnetic-element w-full text-left p-4 rounded-xl border border-white/5 flex items-center justify-between transition-all duration-300 bg-transparent text-brand-muted hover:border-white/20 cursor-pointer" id="svc-tab-1" onclick="selectServiceTab(1)" role="tab">
+<span class="flex items-center gap-3">
+<span class="tab-num text-white/40 font-bold">02</span>
+<span class="tracking-widest uppercase">FOCO — LANDING PAGES</span>
+</span>
+<span class="tab-dot w-2 h-2 rounded-full bg-transparent"></span>
+</button>
+<button aria-selected="false" class="svc-tab-btn magnetic-element w-full text-left p-4 rounded-xl border border-white/5 flex items-center justify-between transition-all duration-300 bg-transparent text-brand-muted hover:border-white/20 cursor-pointer" id="svc-tab-2" onclick="selectServiceTab(2)" role="tab">
+<span class="flex items-center gap-3">
+<span class="tab-num text-white/40 font-bold">03</span>
+<span class="tracking-widest uppercase">POSSIBILIDADES — DEV</span>
+</span>
+<span class="tab-dot w-2 h-2 rounded-full bg-transparent"></span>
+</button>
+</div>
+</div>
+<!-- Coluna Direita: Cards de Serviços Dinâmicos Sem Vão Morto -->
+<div class="lg:col-span-7 relative min-h-[360px] sm:min-h-[380px] fade-in-element">
+<!-- Painel Serviço 01: PRESENÇA -->
+<div class="service-slide bg-brand-graphite rounded-3xl p-8 lg:p-10 border border-white/[0.08] shadow-2xl flex flex-col justify-between opacity-100 translate-y-0 block backdrop-blur-xl" id="service-panel-0" role="tabpanel">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-mono text-xs text-brand-green tracking-widest uppercase">01 / PRESENÇA</span>
+<span class="text-xs font-mono text-brand-muted">ESTRUTURA COMPLETA</span>
+</div>
+<h3 class="text-2xl lg:text-3xl font-bold text-brand-white mb-4">
+            Sites profissionais.
+          </h3>
+<p class="text-base text-brand-white/80 leading-relaxed font-normal">
+            Um espaço próprio para apresentar seu trabalho, construir confiança e facilitar o primeiro contato.
+          </p>
+</div>
+<div class="pt-8 border-t border-white/[0.08] mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+<div class="flex items-start gap-2.5">
+<span class="text-brand-green mt-0.5">✔</span>
+<span class="text-xs text-brand-white/90">Design alinhado à sua identidade</span>
+</div>
+<div class="flex items-start gap-2.5">
+<span class="text-brand-green mt-0.5">✔</span>
+<span class="text-xs text-brand-white/90">Experiência completa no celular</span>
+</div>
+<div class="flex items-start gap-2.5">
+<span class="text-brand-green mt-0.5">✔</span>
+<span class="text-xs text-brand-white/90">Contato direto pelo WhatsApp</span>
+</div>
+</div>
+</div>
+<!-- Painel Serviço 02: FOCO -->
+<div class="service-slide bg-brand-graphite rounded-3xl p-8 lg:p-10 border border-white/[0.08] shadow-2xl flex flex-col justify-between opacity-0 translate-y-4 hidden backdrop-blur-xl" id="service-panel-1" role="tabpanel">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-mono text-xs text-brand-green tracking-widest uppercase">02 / FOCO</span>
+<span class="text-xs font-mono text-brand-muted">ALTA CONVERSÃO</span>
+</div>
+<h3 class="text-2xl lg:text-3xl font-bold text-brand-white mb-4">
+            Landing pages.
+          </h3>
+<p class="text-base text-brand-white/80 leading-relaxed font-normal">
+            Uma página com um objetivo claro. Apresentamos sua oferta e construímos um caminho simples até a ação.
+          </p>
+</div>
+<div class="pt-8 border-t border-white/[0.08] mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+<div class="flex items-start gap-2.5">
+<span class="text-brand-green mt-0.5">✔</span>
+<span class="text-xs text-brand-white/90">Mensagem clara e bem organizada</span>
+</div>
+<div class="flex items-start gap-2.5">
+<span class="text-brand-green mt-0.5">✔</span>
+<span class="text-xs text-brand-white/90">Hierarquia que conduz a leitura</span>
+</div>
+<div class="flex items-start gap-2.5">
+<span class="text-brand-green mt-0.5">✔</span>
+<span class="text-xs text-brand-white/90">Foco na sua campanha ou serviço</span>
+</div>
+</div>
+</div>
+<!-- Painel Serviço 03: POSSIBILIDADES -->
+<div class="service-slide bg-brand-graphite rounded-3xl p-8 lg:p-10 border border-white/[0.08] shadow-2xl flex flex-col justify-between opacity-0 translate-y-4 hidden backdrop-blur-xl" id="service-panel-2" role="tabpanel">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-mono text-xs text-brand-purple tracking-widest uppercase">03 / POSSIBILIDADES</span>
+<span class="text-xs font-mono text-brand-muted">CUSTOM DEV</span>
+</div>
+<h3 class="text-2xl lg:text-3xl font-bold text-brand-white mb-4">
+            Desenvolvimento personalizado.
+          </h3>
+<p class="text-base text-brand-white/80 leading-relaxed font-normal">
+            Quando seu projeto pede algo específico, desenhamos a experiência e desenvolvemos a solução com você.
+          </p>
+</div>
+<div class="pt-8 border-t border-white/[0.08] mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+<div class="flex items-start gap-2.5">
+<span class="text-brand-purple mt-0.5">✦</span>
+<span class="text-xs text-brand-white/90">Interfaces sob medida</span>
+</div>
+<div class="flex items-start gap-2.5">
+<span class="text-brand-purple mt-0.5">✦</span>
+<span class="text-xs text-brand-white/90">Interações e animações</span>
+</div>
+<div class="flex items-start gap-2.5">
+<span class="text-brand-purple mt-0.5">✦</span>
+<span class="text-xs text-brand-white/90">Integrações conforme o projeto</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ==========================================
+       6. PROCESSO (04 / DO COMEÇO AO AR)
+       ========================================== -->
+<section class="py-24 sm:py-32 border-t border-white/[0.06] relative bg-[#09090D]" id="processo">
+<div class="max-w-7xl mx-auto px-6 sm:px-8">
+<!-- Cabeçalho da Seção -->
+<div class="max-w-3xl mb-16 sm:mb-20">
+<div class="font-mono text-xs tracking-wider text-brand-purple uppercase mb-4 fade-in-element flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-brand-purple"></span>
+<span>04 / DO COMEÇO AO AR</span>
+</div>
+<h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-[1.1] text-brand-white fade-in-element">
+          Você cuida do seu trabalho.<br/>
+<span class="text-brand-muted">Nós cuidamos do seu site.</span>
+</h2>
+</div>
+<!-- 4 Colunas Monumentais com Glass Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+<!-- Etapa 01 -->
+<div class="p-8 rounded-2xl bg-brand-graphite/40 border border-white/[0.08] hover:border-brand-purple/50 transition-all duration-300 fade-in-element relative group backdrop-blur-sm">
+<div class="font-mono text-3xl font-extrabold text-brand-purple mb-6 group-hover:scale-105 transition-transform inline-block">
+            01
+          </div>
+<h3 class="text-xl font-bold text-brand-white mb-3">
+            Entendemos.
+          </h3>
+<p class="text-sm text-brand-white/75 leading-relaxed font-normal">
+            Seu momento, seu público e o que sua presença precisa comunicar com exatidão.
+          </p>
+</div>
+<!-- Etapa 02 -->
+<div class="p-8 rounded-2xl bg-brand-graphite/40 border border-white/[0.08] hover:border-brand-purple/50 transition-all duration-300 fade-in-element relative group backdrop-blur-sm">
+<div class="font-mono text-3xl font-extrabold text-brand-purple mb-6 group-hover:scale-105 transition-transform inline-block">
+            02
+          </div>
+<h3 class="text-xl font-bold text-brand-white mb-3">
+            Criamos.
+          </h3>
+<p class="text-sm text-brand-white/75 leading-relaxed font-normal">
+            Textos, identidade e experiência pensados juntos, em cada microrreflexo e detalhe.
+          </p>
+</div>
+<!-- Etapa 03 -->
+<div class="p-8 rounded-2xl bg-brand-graphite/40 border border-white/[0.08] hover:border-brand-purple/50 transition-all duration-300 fade-in-element relative group backdrop-blur-sm">
+<div class="font-mono text-3xl font-extrabold text-brand-purple mb-6 group-hover:scale-105 transition-transform inline-block">
+            03
+          </div>
+<h3 class="text-xl font-bold text-brand-white mb-3">
+            Refinamos.
+          </h3>
+<p class="text-sm text-brand-white/75 leading-relaxed font-normal">
+            Você acompanha a evolução interativa e aprovamos juntos o resultado definitivo.
+          </p>
+</div>
+<!-- Etapa 04 -->
+<div class="p-8 rounded-2xl bg-brand-graphite/40 border border-white/[0.08] hover:border-brand-green/50 transition-all duration-300 fade-in-element relative group backdrop-blur-sm">
+<div class="font-mono text-3xl font-extrabold text-brand-green mb-6 group-hover:scale-105 transition-transform inline-block">
+            04
+          </div>
+<h3 class="text-xl font-bold text-brand-white mb-3">
+            Publicamos.
+          </h3>
+<p class="text-sm text-brand-white/75 leading-relaxed font-normal">
+            Cuidamos da infraestrutura, performance e domínio para colocar sua presença no ar.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- ==========================================
+       7. CTA FINAL (BLOCO ROXO MARCANTE & MONOGRAMA K)
+       ========================================== -->
+<section class="py-20 sm:py-28 max-w-7xl mx-auto px-6 sm:px-8">
+<div class="relative bg-gradient-to-br from-[#7A3BFF] via-[#652FE0] to-[#4314A0] rounded-3xl p-8 sm:p-14 lg:p-20 overflow-hidden shadow-[0_25px_60px_-15px_rgba(122,59,255,0.45)] fade-in-element border border-white/20">
+<!-- Detalhes de textura e iluminação -->
+<div class="absolute -top-24 -right-24 w-96 h-96 bg-brand-green/20 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-24 -left-24 w-96 h-96 bg-black/40 rounded-full blur-2xl pointer-events-none"></div>
+<div class="relative z-10 max-w-3xl">
+<!-- Rótulo Superior -->
+<div class="font-mono text-xs tracking-wider text-brand-white/90 uppercase mb-5 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15">
+<span class="w-2 h-2 rounded-full bg-brand-green animate-pulse"></span>
+<span>SEU PRÓXIMO CAPÍTULO</span>
+</div>
+<!-- Título com Destaque em Verde -->
+<h2 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-brand-white leading-[1.08] mb-6">
+          Vamos fazer <span class="text-brand-green drop-shadow-[0_0_25px_rgba(124,255,107,0.4)]">acontecer?</span>
+</h2>
+<!-- Texto de Apoio -->
+<p class="text-lg sm:text-xl text-brand-white/90 font-normal leading-relaxed mb-10 max-w-xl">
+          Conte o que você tem em mente. A gente constrói o próximo passo com você.
+        </p>
+<!-- Botão Preto de Alto Contraste com WhatsApp -->
+<div>
+<a class="magnetic-element magnetic-glow-btn glow-purple inline-flex items-center gap-3.5 px-8 py-4 rounded-xl font-bold text-sm sm:text-base bg-brand-black text-brand-white hover:bg-black/90 hover:scale-[1.02] transition-all duration-200 shadow-2xl focus:outline-none focus:ring-4 focus:ring-black/40 group border border-white/10 cursor-pointer" href="https://wa.me/5548998161360?text=Ol%C3%A1%2C%20quero%20conversar%20sobre%20um%20projeto%20com%20a%20Koyn." rel="noopener noreferrer" target="_blank">
+<span class="relative z-10">Conversar com a Koyn</span>
+<svg class="w-4 h-4 text-brand-green group-hover:translate-x-1.5 transition-transform relative z-10" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+</a>
+</div>
+</div>
+<!-- Marca d'água monumental com o Monograma "K" -->
+<div aria-hidden="true" class="absolute right-4 -bottom-10 opacity-15 pointer-events-none select-none hidden lg:block">
+<svg class="w-88 h-88 text-white" fill="currentColor" viewbox="0 0 100 100">
+<path d="M20 15h20v25L60 15h25L55 45l30 40H60L40 55v30H20V15z"></path>
+</svg>
+</div>
+</div>
+</section>
+<!-- ==========================================
+       8. FOOTER
+       ========================================== -->
+<footer class="border-t border-white/[0.08] bg-[#060609] py-16 sm:py-20">
+<div class="max-w-7xl mx-auto px-6 sm:px-8">
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-12 border-b border-white/[0.06]">
+<!-- Logo e Frase -->
+<div>
+<a aria-label="Koyn Agency Home" class="magnetic-element flex items-center gap-3 mb-3 group cursor-pointer" href="#hero">
+<div class="w-8 h-8 rounded-lg bg-brand-graphite border border-white/10 flex items-center justify-center">
+<svg class="w-4 h-4 text-brand-green" fill="currentColor" viewbox="0 0 24 24">
+<path d="M4 3h5v7.2L16.2 3H22l-8.5 9.2L22 21h-5.8l-7.2-8.8V21H4V3z"></path>
+</svg>
+</div>
+<span class="text-xl font-bold tracking-tight text-brand-white">
+              koyn<span class="text-brand-purple">.</span>
+</span>
+</a>
+<p class="text-sm text-brand-muted">
+            Soluções digitais para profissionais reais.
+          </p>
+</div>
+<!-- Links Sociais & Contato -->
+<div class="flex flex-wrap items-center gap-6 sm:gap-8 text-sm font-medium">
+<a class="magnetic-element inline-flex items-center gap-2 text-brand-white/80 hover:text-brand-green transition-colors focus:outline-none focus:text-brand-green cursor-pointer py-1 px-2 rounded-lg" href="https://www.instagram.com/koynagency/" rel="noopener noreferrer" target="_blank">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path>
+</svg>
+<span>Instagram</span>
+</a>
+<a class="magnetic-element inline-flex items-center gap-2 text-brand-white/80 hover:text-brand-green transition-colors focus:outline-none focus:text-brand-green cursor-pointer py-1 px-2 rounded-lg" href="https://wa.me/5548998161360?text=Ol%C3%A1%2C%20quero%20conversar%20sobre%20um%20projeto%20com%20a%20Koyn." rel="noopener noreferrer" target="_blank">
+<svg class="w-4 h-4 text-brand-green" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.599 2.679-.702c.974.553 1.77.849 2.781.849 3.18 0 5.767-2.587 5.768-5.766.001-3.182-2.585-5.769-5.768-5.769zm3.392 8.244c-.144.405-.837.774-1.17.824-.311.045-.633.065-1.028-.063-.564-.182-1.341-.532-2.316-1.506-.976-.976-1.326-1.752-1.507-2.317-.129-.395-.109-.717-.063-1.028.05-.333.419-1.026.824-1.17.135-.048.281-.03.389.043.109.073.742 1.802.774 1.942.031.141-.01.277-.099.379l-.372.428c-.082.094-.092.203-.032.327.186.388.583.953 1.157 1.528.574.573 1.14 1.002 1.528 1.188.124.06.233.05.327-.032l.428-.372c.102-.089.238-.13.379-.099.14.032 1.869.665 1.942.774.073.108.091.254.043.389zM12 2C6.477 2 2 6.477 2 12c0 1.891.527 3.659 1.442 5.174l-1.442 5.276 5.426-1.423C8.868 21.905 10.395 22.45 12 22.45c5.523 0 10-4.477 10-10S17.523 2 12 2z"></path>
+</svg>
+<span>WhatsApp</span>
+</a>
+</div>
+</div>
+<!-- Copyright e créditos -->
+<div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-brand-muted">
+<div>
+          © 2026 Koyn. Todos os direitos reservados.
+        </div>
+<div class="text-white/40">
+          DESIGN &amp; TECNOLOGIA / FLORIANÓPOLIS &amp; BRASIL
+        </div>
+</div>
+</div>
+</footer>
+<!-- ==========================================
+       SCRIPTS: OBSERVER, CARROSSEL, SERVICES &
+       CUSTOM CURSOR / MAGNETIC HOVER ENGINE
+       ========================================== -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Intersection Observer para fade-in suave
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      document.querySelectorAll('.fade-in-element').forEach(el => observer.observe(el));
+
+      // 2. Botão Pausar / Retomar Carrossel
+      const toggleBtn = document.getElementById('toggle-marquee-btn');
+      const marqueeWrapper = document.getElementById('marquee-wrapper');
+      const btnText = document.getElementById('marquee-btn-text');
+      const btnIcon = document.getElementById('marquee-btn-icon');
+      let isPaused = false;
+
+      if (toggleBtn && marqueeWrapper) {
+        toggleBtn.addEventListener('click', () => {
+          isPaused = !isPaused;
+          if (isPaused) {
+            marqueeWrapper.classList.add('marquee-paused');
+            toggleBtn.setAttribute('aria-pressed', 'true');
+            btnText.textContent = 'Retomar movimento';
+            btnIcon.className = 'w-2 h-2 rounded-sm bg-brand-purple relative z-10';
+          } else {
+            marqueeWrapper.classList.remove('marquee-paused');
+            toggleBtn.setAttribute('aria-pressed', 'false');
+            btnText.textContent = 'Pausar movimento';
+            btnIcon.className = 'w-2 h-2 rounded-sm bg-brand-green relative z-10';
+          }
+        });
+      }
+
+      // 3. Seleção direta e fluida de abas em O QUE FAZEMOS (Sem scroll virtual nem sticky de 300vh)
+      const panels = [
+        document.getElementById('service-panel-0'),
+        document.getElementById('service-panel-1'),
+        document.getElementById('service-panel-2')
+      ];
+      const tabs = [
+        document.getElementById('svc-tab-0'),
+        document.getElementById('svc-tab-1'),
+        document.getElementById('svc-tab-2')
+      ];
+
+      window.selectServiceTab = function(index) {
+        panels.forEach((p, i) => {
+          if (!p) return;
+          if (i === index) {
+            p.classList.remove('hidden', 'opacity-0', 'translate-y-4');
+            p.classList.add('block', 'opacity-100', 'translate-y-0');
+          } else {
+            p.classList.add('hidden', 'opacity-0', 'translate-y-4');
+            p.classList.remove('block', 'opacity-100', 'translate-y-0');
+          }
+        });
+
+        tabs.forEach((t, i) => {
+          if (!t) return;
+          const dot = t.querySelector('.tab-dot');
+          const num = t.querySelector('.tab-num');
+          if (i === index) {
+            t.setAttribute('aria-selected', 'true');
+            t.className = 'svc-tab-btn magnetic-element w-full text-left p-4 rounded-xl border flex items-center justify-between transition-all duration-300 bg-brand-graphite text-brand-white border-brand-green/40 shadow-lg cursor-pointer';
+            if (dot) dot.className = 'tab-dot w-2 h-2 rounded-full bg-brand-green shadow-[0_0_8px_#7CFF6B]';
+            if (num) num.className = 'tab-num text-brand-green font-bold';
+          } else {
+            t.setAttribute('aria-selected', 'false');
+            t.className = 'svc-tab-btn magnetic-element w-full text-left p-4 rounded-xl border border-white/5 flex items-center justify-between transition-all duration-300 bg-transparent text-brand-muted hover:border-white/20 cursor-pointer';
+            if (dot) dot.className = 'tab-dot w-2 h-2 rounded-full bg-transparent';
+            if (num) num.className = 'tab-num text-white/40 font-bold';
+          }
+        });
+      };
+
+      // ==========================================
+      // 4. CUSTOM CURSOR & MAGNETIC HOVER / GLOW ENGINE
+      // ==========================================
+      const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (isFinePointer && !prefersReducedMotion) {
+        const dot = document.getElementById('custom-cursor-dot');
+        const follower = document.getElementById('custom-cursor-follower');
+        
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let followerX = mouseX;
+        let followerY = mouseY;
+        let isCursorActive = false;
+
+        // Movimento do Mouse
+        window.addEventListener('mousemove', (e) => {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+
+          if (!isCursorActive) {
+            isCursorActive = true;
+            document.body.classList.remove('cursor-hidden');
+            followerX = mouseX;
+            followerY = mouseY;
+          }
+
+          if (dot) {
+            dot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+          }
+        }, { passive: true });
+
+        // Esconder quando sair da janela
+        document.addEventListener('mouseleave', () => {
+          document.body.classList.add('cursor-hidden');
+        });
+        document.addEventListener('mouseenter', () => {
+          document.body.classList.remove('cursor-hidden');
+        });
+
+        // Loop de Renderização com Lerp Suave (Inércia Elegante)
+        const lerpFactor = 0.16;
+        function renderCursor() {
+          followerX += (mouseX - followerX) * lerpFactor;
+          followerY += (mouseY - followerY) * lerpFactor;
+
+          if (follower) {
+            follower.style.transform = `translate(${followerX}px, ${followerY}px)`;
+          }
+          requestAnimationFrame(renderCursor);
+        }
+        renderCursor();
+
+        // Elementos Interativos para Hover State do Cursor
+        const interactiveSelectors = 'a, button, .project-card, .svc-tab-btn, input, [role="button"]';
+        const interactiveElements = document.querySelectorAll(interactiveSelectors);
+
+        interactiveElements.forEach((el) => {
+          el.addEventListener('mouseenter', () => {
+            document.body.classList.add('cursor-hover');
+            if (el.classList.contains('glow-purple') || el.closest('#processo') || el.closest('#sobre')) {
+              document.body.classList.add('cursor-purple-hover');
+            }
+          });
+
+          el.addEventListener('mouseleave', () => {
+            document.body.classList.remove('cursor-hover', 'cursor-purple-hover');
+          });
+        });
+
+        // Efeito Magnético + Spotlight Glow Dinâmico nos Botões e Elementos Chave
+        const magneticElements = document.querySelectorAll('.magnetic-element, .project-card');
+
+        magneticElements.forEach((el) => {
+          const isButton = el.tagName.toLowerCase() === 'button' || el.tagName.toLowerCase() === 'a';
+          const maxDistance = isButton ? 0.32 : 0.12;
+
+          el.addEventListener('mousemove', (e) => {
+            const rect = el.getBoundingClientRect();
+            const relX = e.clientX - rect.left;
+            const relY = e.clientY - rect.top;
+
+            el.style.setProperty('--glow-x', `${relX}px`);
+            el.style.setProperty('--glow-y', `${relY}px`);
+            el.style.setProperty('--glow-opacity', '1');
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const deltaX = (relX - centerX) * maxDistance;
+            const deltaY = (relY - centerY) * maxDistance;
+
+            el.style.transform = `translate(${deltaX.toFixed(2)}px, ${deltaY.toFixed(2)}px)`;
+          });
+
+          el.addEventListener('mouseleave', () => {
+            el.style.setProperty('--glow-opacity', '0');
+            el.style.transform = '';
+          });
+        });
+      }
+    });
+  </script>
+</body></html>
